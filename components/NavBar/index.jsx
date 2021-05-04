@@ -1,9 +1,9 @@
 import Link from "next/link";
-// import NavBarStyle from "../NavBarStyle";
+import NavBarStyle from "../NavBarStyle";
 
 export default function NavBar() {
   return (
-    <ul>
+    <NavBarStyle>
       <li>
         <Link href="/">
           <a>Home</a>
@@ -24,6 +24,6 @@ export default function NavBar() {
           <a>About</a>
         </Link>
       </li>
-    </ul>
+    </NavBarStyle>
   );
 }
