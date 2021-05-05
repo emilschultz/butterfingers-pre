@@ -1,15 +1,24 @@
 import styled from "styled-components";
-import theme from "../../themeConfig";
 
 const NavBarStyle = styled.ul`
+  width: 100%;
   display: flex;
-  width: 100vw;
-  display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   list-style-type: none;
   padding: 0;
-  border-bottom: 1px solid black;
-  color: ${({ theme }) => theme.text};
+  font-size: 1.2rem;
+  color: ${(theme) => theme.text};
+
+  a {
+    color: ${({ theme }) => theme.text};
+
+    text-decoration: none;
+    margin: 20px;
+  }
+
+  div {
+    display: flex;
+  }
 `;
 
 export default NavBarStyle;
