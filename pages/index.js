@@ -1,24 +1,15 @@
-import firebase from "../config/firebase";
-import { useEffect, useState } from "react";
+import Link from "next/link";
 
 export default function Home() {
-  const [items, setItems] = useState();
-
-  // get items from firestore
-  useEffect(() => {
-    firebase
-      .firestore()
-      .collection("items")
-      .onSnapshot((querySnapshot) => {
-        setItems(querySnapshot.docs.map((item) => item.data()));
-      });
-  }, []);
-
-  console.log("ITEMS FROM FIRESTORE:", items);
-
   return (
     <>
       <p>Home</p>
+      <Link href="/lost">
+        <a>I lost something</a>
+      </Link>
+      <Link href="/found">
+        <a>I found something</a>
+      </Link>
     </>
   );
 }
