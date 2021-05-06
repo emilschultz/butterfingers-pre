@@ -1,7 +1,13 @@
 import { useState } from "react";
 import { ThemeProvider } from "styled-components";
+import { StateMachineProvider, createStore } from "little-state-machine";
+
 import { lightTheme, darkTheme, GlobalStyles } from "../themeConfig";
 import NavBar from "../components/NavBar";
+
+createStore({
+  data: {},
+});
 
 function MyApp({ Component, pageProps }) {
   const [theme, setTheme] = useState("light");
@@ -11,14 +17,19 @@ function MyApp({ Component, pageProps }) {
   };
 
   return (
-    <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
-      <GlobalStyles />
-      <NavBar />
-      <button onClick={toggleTheme}>Switch Theme</button>
-      <Component {...pageProps} />
-    </ThemeProvider>
+    <StateMachineProvider>
+      <main style={{ width: "100vw" }}>
+        <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
+          <GlobalStyles />
+          <NavBar />
+          <Component {...pageProps} />
+          <br />
+          <br />
+          <button onClick={toggleTheme}>Switch Theme</button>
+        </ThemeProvider>
+      </main>
+    </StateMachineProvider>
   );
 }
-console.log({ lightTheme });
 
 export default MyApp;
