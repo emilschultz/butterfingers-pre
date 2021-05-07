@@ -20,7 +20,6 @@ export default function stepFive() {
 
   // little state machine
   const { state, actions } = useStateMachine({ clearAction, updateAction });
-  console.log("STATE:", state);
 
   const currentState = state;
 
@@ -49,7 +48,7 @@ export default function stepFive() {
     actions.updateAction(data);
     addToFirestore();
     actions.clearAction(data);
-    router.push("/");
+    router.push("/thankYou");
   };
 
   const clearData = (data) => {
@@ -76,6 +75,7 @@ export default function stepFive() {
         )}
         <input type="submit" />
       </form>
+      <button onClick={clearData}>CLEAR DATA</button>
     </>
   );
 }
