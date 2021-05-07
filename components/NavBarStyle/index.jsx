@@ -6,7 +6,7 @@ const NavBarStyle = styled.ul`
   justify-content: space-between;
   list-style-type: none;
   padding: 0;
-  font-size: 1.2rem;
+  font-size: 2rem;
   color: ${(theme) => theme.text};
 
   a {
@@ -18,6 +18,10 @@ const NavBarStyle = styled.ul`
 
   div {
     display: flex;
+  }
+
+  & .bf-logo {
+    margin: 0;
   }
 `;
 
