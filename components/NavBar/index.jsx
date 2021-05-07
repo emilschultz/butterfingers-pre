@@ -6,24 +6,26 @@ export default function NavBar() {
     <NavBarStyle>
       <li>
         <Link href="/">
-          <a>Home</a>
+          <a className="bf-logo">Butterfingers</a>
         </Link>
       </li>
-      <li>
-        <Link href="/lost">
-          <a>Lost</a>
-        </Link>
-      </li>
-      <li>
-        <Link href="/found">
-          <a>Found</a>
-        </Link>
-      </li>
-      <li>
-        <Link href="/about">
-          <a>About</a>
-        </Link>
-      </li>
+      <div>
+        <li>
+          <Link href="/lost">
+            <a>Lost</a>
+          </Link>
+        </li>
+        <li>
+          <Link href="/found">
+            <a>Found</a>
+          </Link>
+        </li>
+        <li>
+          <Link href="/about">
+            <a>About</a>
+          </Link>
+        </li>
+      </div>
     </NavBarStyle>
   );
 }
