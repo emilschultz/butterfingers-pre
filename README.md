@@ -1,3 +1,6 @@
+## So what does this app do now..?
+Well it is pretty simple. There are two use cases and one solution. Check it out.
+
 ```bash 
 ☝️ Use case 1:
 Somewhere on your sunday walk, you drop something, for example your keys. You come home and panic begins to spread. What di you do?
