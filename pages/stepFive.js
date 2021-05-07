@@ -1,26 +1,59 @@
 import { useForm } from "react-hook-form";
 import { useStateMachine } from "little-state-machine";
-import updateAction from "../stateMachineActions/updateAction";
 import { useRouter } from "next/router";
+import firebase from "../config/firebase";
+
+import updateAction from "../stateMachineActions/updateAction";
+import clearAction from "../stateMachineActions/clearAction";
 
 import PageTitle from "../components/PageTitle";
 
 export default function stepFive() {
   const router = useRouter();
 
-  const { state } = useStateMachine(updateAction);
-  console.log("STATE:", state);
-
+  // react hook form
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const { actions } = useStateMachine({ updateAction });
 
+  // little state machine
+  const { state, actions } = useStateMachine({ clearAction, updateAction });
+  console.log("STATE:", state);
+
+  const currentState = state;
+
+  // add data to firestore
+  const addToFirestore = () => {
+    firebase
+      .firestore()
+      .collection("items")
+      .add({
+        name: `${currentState.data.name}`,
+        description: `${currentState.data.description}`,
+        droplocation: `${currentState.data.droplocation}`,
+        currentlocation: `${currentState.data.currentlocation}`,
+        extrainfo: `${currentState.data.extrainfo}`,
+      })
+      .then((docRef) => {
+        console.log("DocRef ID:", docRef.id);
+      })
+      .catch((error) => {
+        console.log("Error:", error);
+      });
+  };
+
+  // submit
   const onSubmit = (data) => {
     actions.updateAction(data);
-    router.push("/stepFive");
+    addToFirestore();
+    actions.clearAction(data);
+    router.push("/");
+  };
+
+  const clearData = (data) => {
+    actions.clearAction(data);
   };
 
   return (
