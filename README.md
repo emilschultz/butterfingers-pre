@@ -10,7 +10,8 @@ Somewhere on your sunday walk, you drop something, for example your keys. You co
 You find a lost item on the street. For example someone's keys. You are unsure what to do with them, because how will the one who lost them be able to get them back? What do you do?
 ```
 ```bash 
-👉 The answer is simple. Either way, you go to www.butterfingers.no and all will be good!
+👉 Solution:
+The answer is simple. Either way, you go to www.butterfingers.no and all will be good!
 ```
 
 
