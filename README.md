@@ -1,5 +1,7 @@
-> ☝️Use case 1:
+```bash 
+☝️Use case 1:
 Somewhere on your sunday walk, you drop something, for example your keys. You come home and panic begins to spread. What di you do?
+```
 
 > ☝️Use case 2: 
 You find a lost item on the street. For example someone's keys. You are unsure what to do with them, because how will the one who lost them be able to get them back? What do you do?
