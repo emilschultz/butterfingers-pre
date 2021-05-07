@@ -20,11 +20,6 @@ export default function Found() {
     // console.log("DATA:", data.name);
   };
 
-  // const Name = () => {
-  //   const { state } = useStateMachine();
-  //   return <h1>{state.data.name}</h1>;
-  // };
-
   return (
     <>
       <PageTitle>Cool, what did you find?</PageTitle>

@@ -16,31 +16,21 @@ export default function Lost() {
         .get()
         .then((querySnapshot) => {
           setFoundItems(querySnapshot.docs.map((item) => item.data()));
-        })
-        .catch((error) => {
-          console.log("Error getting documents: ", error);
         });
     } catch {
       console.log("Item not found yet, sorry");
     }
   };
 
+  // Due to case sensitivity and user mistakes when adding items to firestore, this function will capitalize the first letter in the search query, which the user types in. And then of course defines this as the input fields target value.
   const inputHandler = (event) => {
     event.preventDefault();
-    setSearchItem(event.target.value);
+    let inputValue = event.target.value;
+    let capitalizedFirstLetter =
+      inputValue.charAt(0).toUpperCase() + inputValue.slice(1);
+
+    setSearchItem(capitalizedFirstLetter);
   };
-
-  // const searchHandler = (e) => {
-  //   e.preventDefault();
-  //   console.log("searchHandler:", searchItem);
-  // };
-
-  // NO RESULTS = return this
-  // if (foundItems.length === 0) {
-  //   alert(
-  //     `Your ${searchItem} has not been found yet. Sorry. Try again later.`
-  //   );
-  // }
 
   console.log("FOUND ITEMS:", foundItems);
 
