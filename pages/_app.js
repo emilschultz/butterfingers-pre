@@ -4,6 +4,7 @@ import { StateMachineProvider, createStore } from "little-state-machine";
 
 import { lightTheme, darkTheme, GlobalStyles } from "../themeConfig";
 import NavBar from "../components/NavBar";
+import Footer from "../components/Footer";
 
 createStore({
   data: {},
