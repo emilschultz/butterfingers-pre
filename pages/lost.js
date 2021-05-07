@@ -2,6 +2,8 @@ import PageTitle from "../components/PageTitle";
 import firebase from "../config/firebase";
 import { useState } from "react";
 
+import Grid from "../components/Grid";
+
 export default function Lost() {
   const [foundItems, setFoundItems] = useState([]);
   const [searchItem, setSearchItem] = useState("");
@@ -34,9 +36,20 @@ export default function Lost() {
 
   console.log("FOUND ITEMS:", foundItems);
 
+  const foundItemslist = foundItems.map((item) => {
+    return (
+      <div key={Math.random() * (100 - 1)}>
+        <p>What: {item.name}</p>
+        <p>{item.description}</p>
+        <p>Now at: {item.currentlocation}</p>
+      </div>
+    );
+  });
+
   return (
     <>
       <PageTitle>What did you lose?</PageTitle>
+
       <form>
         <label htmlFor="lostItem">Type your lost item here:</label>
         <input
@@ -45,8 +58,11 @@ export default function Lost() {
           name="lostItem"
           onChange={inputHandler}
         ></input>
-        <button type="submit" onClick={firebaseQuery}></button>
+        <input type="submit" onClick={firebaseQuery}></input>
       </form>
+
+      <PageTitle>Results:</PageTitle>
+      <Grid>{foundItemslist}</Grid>
     </>
   );
 }
