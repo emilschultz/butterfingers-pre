@@ -34,6 +34,7 @@ export default function stepFive() {
         droplocation: `${currentState.data.droplocation}`,
         currentlocation: `${currentState.data.currentlocation}`,
         extrainfo: `${currentState.data.extrainfo}`,
+        timestamp: firebase.firestore.Timestamp.now(),
       })
       .then((docRef) => {
         console.log("DocRef ID:", docRef.id);
