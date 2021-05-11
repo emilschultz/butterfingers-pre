@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 import firebase from "../config/firebase";
 
 import updateAction from "../stateMachineActions/updateAction";
-import clearAction from "../stateMachineActions/clearAction";
 
 import PageTitle from "../components/PageTitle";
 
@@ -19,7 +18,7 @@ export default function stepFive() {
   } = useForm();
 
   // little state machine
-  const { state, actions } = useStateMachine({ clearAction, updateAction });
+  const { state, actions } = useStateMachine({ updateAction });
 
   const currentState = state;
 
@@ -34,7 +33,8 @@ export default function stepFive() {
         droplocation: `${currentState.data.droplocation}`,
         currentlocation: `${currentState.data.currentlocation}`,
         extrainfo: `${currentState.data.extrainfo}`,
-        timestamp: firebase.firestore.Timestamp.now(),
+        image: `${currentState.data.image}`,
+        // timestamp: firebase.firestore.Timestamp.fromDate(new Date()),
       })
       .then((docRef) => {
         console.log("DocRef ID:", docRef.id);
@@ -48,7 +48,6 @@ export default function stepFive() {
   const onSubmit = (data) => {
     actions.updateAction(data);
     addToFirestore();
-    actions.clearAction(data);
     router.push("/thankYou");
   };
 
@@ -58,22 +57,20 @@ export default function stepFive() {
 
   return (
     <>
-      <PageTitle>Anything else the owner should know?</PageTitle>
+      <PageTitle>Please upload an image of the item if possible</PageTitle>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <label htmlFor="extrainfo">
+        <label htmlFor="image">
           Desribe what you did with the item. Eg. “Handed it in at 7/11 by the
           court house” or “Placed in on the bench where I found it”
         </label>
 
         <input
-          id="extrainfo"
-          {...register("extrainfo", {
-            required: true,
+          type="file"
+          id="image"
+          {...register("image", {
+            required: false,
           })}
         />
-        {errors.extrainfo && errors.extrainfo.type === "required" && (
-          <span>This is required</span>
-        )}
         <input type="submit" />
       </form>
       <button onClick={clearData}>CLEAR DATA</button>
