@@ -1,18 +1,16 @@
 ## So what does this app do now..?
 Well it is pretty simple. There are two use cases and one solution. Check it out.
 
-```bash 
+
 ☝️ Use case 1:
 Somewhere on your sunday walk, you drop something, for example your keys. You come home and panic begins to spread. What di you do?
-```
-```bash 
+
 ✌️ Use case 2: 
 You find a lost item on the street. For example someone's keys. You are unsure what to do with them, because how will the one who lost them be able to get them back? What do you do?
-```
-```bash 
+
 👉 Solution:
 The answer is simple. Either way, you go to www.butterfingers.no and all will be good!
-```
+
 
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
