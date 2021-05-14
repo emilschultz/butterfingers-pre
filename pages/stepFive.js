@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useStateMachine } from "little-state-machine";
 import { useRouter } from "next/router";
@@ -5,10 +6,14 @@ import firebase from "../config/firebase";
 
 import updateAction from "../stateMachineActions/updateAction";
 
+// components
 import PageTitle from "../components/PageTitle";
+import { route } from "next/dist/next-server/server/router";
 
 export default function stepFive() {
   const router = useRouter();
+
+  const [fileUrl, setFileUrl] = useState(null);
 
   // react hook form
   const {
@@ -19,7 +24,6 @@ export default function stepFive() {
 
   // little state machine
   const { state, actions } = useStateMachine({ updateAction });
-
   const currentState = state;
 
   // add data to firestore
@@ -33,7 +37,7 @@ export default function stepFive() {
         droplocation: `${currentState.data.droplocation}`,
         currentlocation: `${currentState.data.currentlocation}`,
         extrainfo: `${currentState.data.extrainfo}`,
-        image: `${currentState.data.image}`,
+        image: `${fileUrl}`,
         // timestamp: firebase.firestore.Timestamp.fromDate(new Date()),
       })
       .then((docRef) => {
@@ -44,25 +48,33 @@ export default function stepFive() {
       });
   };
 
-  // submit
+  // submit and update current state, add data from state to Firestore and route to confirmation page
   const onSubmit = (data) => {
     actions.updateAction(data);
     addToFirestore();
     router.push("/thankYou");
   };
 
-  const clearData = (data) => {
-    actions.clearAction(data);
+  // upload image/file to storage
+  const onFileChange = async (event) => {
+    const file = event.target.files[0];
+    const storageRef = firebase.storage().ref();
+    const fileRef = storageRef.child(file.name);
+    await fileRef.put(file);
+    const fileRefUrl = await fileRef.getDownloadURL();
+    setFileUrl(fileRefUrl);
   };
+
+  // const clearData = (data) => {
+  //   actions.clearAction(data);
+  //   route.push("/found");
+  // };
 
   return (
     <>
       <PageTitle>Please upload an image of the item if possible</PageTitle>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <label htmlFor="image">
-          Desribe what you did with the item. Eg. “Handed it in at 7/11 by the
-          court house” or “Placed in on the bench where I found it”
-        </label>
+        <label htmlFor="image">File:</label>
 
         <input
           type="file"
@@ -70,10 +82,11 @@ export default function stepFive() {
           {...register("image", {
             required: false,
           })}
+          onChange={onFileChange}
         />
         <input type="submit" />
       </form>
-      <button onClick={clearData}>CLEAR DATA</button>
+      {/* <button onClick={clearData}>Delete everything and start over</button> */}
     </>
   );
 }
