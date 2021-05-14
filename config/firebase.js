@@ -1,5 +1,6 @@
 import firebase from "firebase";
 import "firebase/database";
+import "firebase/storage";
 
 if (typeof window !== "undefined" && !firebase.apps.length) {
   try {
@@ -11,11 +12,14 @@ if (typeof window !== "undefined" && !firebase.apps.length) {
       messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
       appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
       databaseURL: process.env.NEXT_PUBLIC_FIREBASE_DATABASEURL,
+      storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
     });
     // firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION);
   } catch (error) {
     console.log(error);
   }
 }
+
+// var storage = firebase.storage();
 
 export default firebase;
