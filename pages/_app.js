@@ -4,10 +4,12 @@ import { StateMachineProvider, createStore } from "little-state-machine";
 
 import { lightTheme, darkTheme, GlobalStyles } from "../themeConfig";
 import NavBar from "../components/NavBar";
-import Footer from "../components/Footer";
+import Main from "../components/Main";
+// import Footer from "../components/Footer";
 
 createStore({
   data: {},
+  individualResult: {},
 });
 
 function MyApp({ Component, pageProps }) {
@@ -19,16 +21,14 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <StateMachineProvider>
-      <main style={{ width: "100vw" }}>
+      <Main>
         <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
           <GlobalStyles />
           <NavBar />
           <Component {...pageProps} />
-          <br />
-          <br />
-          <button onClick={toggleTheme}>Switch Theme</button>
+          {/* <button onClick={toggleTheme}>Switch Theme</button> */}
         </ThemeProvider>
-      </main>
+      </Main>
     </StateMachineProvider>
   );
 }
