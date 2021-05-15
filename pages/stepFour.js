@@ -8,9 +8,11 @@ import PageTitle from "../components/PageTitle";
 export default function stepFour() {
   const router = useRouter();
 
+  // little state machine
   const { state } = useStateMachine(updateAction);
   console.log("STATE:", state);
 
+  // react-hook-form
   const {
     register,
     handleSubmit,
@@ -18,10 +20,10 @@ export default function stepFour() {
   } = useForm();
   const { actions } = useStateMachine({ updateAction });
 
+  // update global state - data object
   const onSubmit = (data) => {
     actions.updateAction(data);
     router.push("/stepFive");
-    // console.log("DATA:", data.name);
   };
 
   return (
