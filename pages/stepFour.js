@@ -3,7 +3,9 @@ import { useStateMachine } from "little-state-machine";
 import updateAction from "../stateMachineActions/updateAction";
 import { useRouter } from "next/router";
 
+import Section from "../components/Section";
 import PageTitle from "../components/PageTitle";
+import Form from "../components/Form";
 
 export default function stepFour() {
   const router = useRouter();
@@ -27,16 +29,18 @@ export default function stepFour() {
   };
 
   return (
-    <>
+    <Section>
       <PageTitle>Where is it now?</PageTitle>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <label htmlFor="currentlocation">
+      <Form onSubmit={handleSubmit(onSubmit)}>
+        <label htmlFor="currentlocation" style={{ display: "none" }}>
           Desribe what you did with the item. Eg. “Handed it in at 7/11 by the
-          court house” or “Placed in on the bench where I found it”
+          court house”
         </label>
 
         <input
           id="currentlocation"
+          placeholder="Desribe what you did with the item. Eg. “Handed it in at 7/11 by the
+          court house”"
           {...register("currentlocation", {
             required: true,
           })}
@@ -45,8 +49,8 @@ export default function stepFour() {
           errors.currentlocation.type === "required" && (
             <span>This is required</span>
           )}
-        <input type="submit" />
-      </form>
-    </>
+        <button type="submit">Next</button>
+      </Form>
+    </Section>
   );
 }

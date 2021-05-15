@@ -5,10 +5,13 @@ import { useRouter } from "next/router";
 import firebase from "../config/firebase";
 
 import updateAction from "../stateMachineActions/updateAction";
+import clearAction from "../stateMachineActions/clearAction";
 
 // components
+import Section from "../components/Section";
 import PageTitle from "../components/PageTitle";
-import { route } from "next/dist/next-server/server/router";
+import Form from "../components/Form";
+import Label from "../components/Label";
 
 export default function stepFive() {
   const router = useRouter();
@@ -23,7 +26,7 @@ export default function stepFive() {
   } = useForm();
 
   // little state machine
-  const { state, actions } = useStateMachine({ updateAction });
+  const { state, actions } = useStateMachine({ clearAction, updateAction });
   const currentState = state;
 
   // add data to firestore
@@ -65,28 +68,30 @@ export default function stepFive() {
     setFileUrl(fileRefUrl);
   };
 
-  // const clearData = (data) => {
-  //   actions.clearAction(data);
-  //   route.push("/found");
-  // };
+  const clearData = (data) => {
+    actions.clearAction(data);
+  };
 
   return (
-    <>
+    <Section>
       <PageTitle>Please upload an image of the item if possible</PageTitle>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <label htmlFor="image">File:</label>
+      <Form onSubmit={handleSubmit(onSubmit)}>
+        <Label htmlFor="image">
+          Choose file:
+          <input
+            style={{ display: "none" }}
+            type="file"
+            id="image"
+            {...register("image", {
+              required: false,
+            })}
+            onChange={onFileChange}
+          />
+        </Label>
 
-        <input
-          type="file"
-          id="image"
-          {...register("image", {
-            required: false,
-          })}
-          onChange={onFileChange}
-        />
-        <input type="submit" />
-      </form>
-      {/* <button onClick={clearData}>Delete everything and start over</button> */}
-    </>
+        <button type="submit">Finish</button>
+        <button onClick={clearData}>Delete everything and start over</button>
+      </Form>
+    </Section>
   );
 }
