@@ -13,7 +13,7 @@ const NavBarStyle = styled.ul`
     color: ${({ theme }) => theme.text};
 
     text-decoration: none;
-    margin: 20px;
+    margin-right: 30px;
   }
 
   div {
@@ -21,7 +21,7 @@ const NavBarStyle = styled.ul`
   }
 
   & .bf-logo {
-    margin: 0;
+    margin-left: -30px;
   }
 `;
 
