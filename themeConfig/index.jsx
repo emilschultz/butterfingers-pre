@@ -12,6 +12,11 @@ export const darkTheme = {
   background: "#999",
 };
 
+export const fonts = {
+  text: "neue-haas-grotesk-text, sans-serif",
+  display: "acumin-pro",
+};
+
 export const GlobalStyles = createGlobalStyle`
 * {
   box-sizing: border-box;
@@ -32,7 +37,8 @@ export const GlobalStyles = createGlobalStyle`
     line-height:1.5;
   }
 body {
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: ${() => fonts.text}, sans-serif; 
+  font-weight: 400; 
   display: flex;
   justify-content: center;
 }
