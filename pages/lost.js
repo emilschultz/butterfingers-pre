@@ -1,13 +1,27 @@
 import PageTitle from "../components/PageTitle";
 import firebase from "../config/firebase";
-import { useState } from "react";
+import React, { useState } from "react";
+import { useStateMachine } from "little-state-machine";
+import { useCurrentItem } from "../context/EachItemContext";
+import { useRouter } from "next/router";
+
+import updateResultAction from "../stateMachineActions/updateResultAction";
 
 import Grid from "../components/Grid";
 
 export default function Lost() {
+  const currentItem = useCurrentItem();
+  const router = useRouter();
+
   const [foundItems, setFoundItems] = useState([]);
   const [searchItem, setSearchItem] = useState("");
 
+  // little state machine
+  const { state, actions } = useStateMachine({ updateResultAction });
+  const currentState = state;
+
+  console.log(currentState);
+  // get
   const firebaseQuery = (e) => {
     e.preventDefault();
     try {
@@ -24,14 +38,13 @@ export default function Lost() {
     }
   };
 
-  // Due to case sensitivity and user mistakes when adding items to firestore, this function will capitalize the first letter in the search query, which the user types in. And then of course defines this as the input fields target value.
+  // input with capitalized first letter
   const inputHandler = (event) => {
     event.preventDefault();
     let inputValue = event.target.value;
-    let capitalizedFirstLetter =
-      inputValue.charAt(0).toUpperCase() + inputValue.slice(1);
-
-    setSearchItem(capitalizedFirstLetter);
+    // let capitalizedFirstLetter =
+    //   inputValue.charAt(0).toUpperCase() + inputValue.slice(1);
+    setSearchItem(inputValue);
   };
 
   console.log("FOUND ITEMS:", foundItems);
@@ -40,11 +53,48 @@ export default function Lost() {
     return (
       <div key={Math.random() * (100 - 1)}>
         <p>What: {item.name}</p>
-        <p>{item.description}</p>
+        <p>Description: {item.description}</p>
         <p>Now at: {item.currentlocation}</p>
+        <img style={{ width: "250px" }} src={item.image}></img>
+        {/* <p>Time: {item.timestamp.seconds}</p> */}
+        <button
+          onClick={() => {
+            currentItem.addItem({
+              name: item.name,
+              description: item.description,
+              droplocation: item.droplocation,
+              currentlocation: item.currentlocation,
+              image: item.image,
+            });
+            router.push("/individualResult");
+          }}
+        >
+          Investigate
+        </button>
       </div>
     );
   });
+  console.log("CURRENT ITEM:", currentItem);
+
+  // const goToResult = (result) => {
+  //   actions.updateResultAction(result);
+  //   console.log("RESULT DATA:", result, "STATE:", currentState);
+  //   router.push("/individualResult");
+  // };
+
+  // const addToMyBooks = (item) => ({
+  //   name: item.name,
+  //   description: item.description,
+  //   currentlocation: item.currentlocation,
+  //   image: item.image,
+  // });
+
+  // adddNew.addToMyBooks({
+  //   name: item.name,
+  //   description: item.description,
+  //   currentlocation: item.currentlocation,
+  //   image: item.image,
+  // });
 
   return (
     <>
