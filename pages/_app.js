@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ThemeProvider } from "styled-components";
 import { StateMachineProvider, createStore } from "little-state-machine";
+import { EachItem } from "../context/EachItemContext";
 
 import { lightTheme, darkTheme, GlobalStyles } from "../themeConfig";
 import NavBar from "../components/NavBar";
@@ -21,14 +22,16 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <StateMachineProvider>
-      <Main>
-        <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
-          <GlobalStyles />
-          <NavBar />
-          <Component {...pageProps} />
-          {/* <button onClick={toggleTheme}>Switch Theme</button> */}
-        </ThemeProvider>
-      </Main>
+      <EachItem>
+        <Main>
+          <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
+            <GlobalStyles />
+            <NavBar />
+            <Component {...pageProps} />
+            {/* <button onClick={toggleTheme}>Switch Theme</button> */}
+          </ThemeProvider>
+        </Main>
+      </EachItem>
     </StateMachineProvider>
   );
 }
