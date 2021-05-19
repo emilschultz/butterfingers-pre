@@ -27,10 +27,10 @@ export default function stepThree() {
 
   return (
     <Section>
-      <PageTitle>Where did you find it?</PageTitle>
+      <PageTitle>WHERER DID YOU FIND IT?</PageTitle>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <label htmlFor="description" style={{ display: "none" }}>
-          Eg. Youngstorgets
+          Eg. Youngstorget, Birkelunden etc.
         </label>
 
         <input
@@ -44,6 +44,8 @@ export default function stepThree() {
           <span>This is required</span>
         )}
         <button type="submit">Next</button>
+        <br />
+        <p>Step 3 / 5</p>
       </Form>
     </Section>
   );

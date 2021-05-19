@@ -6,13 +6,15 @@ import { useRouter } from "next/router";
 import Grid from "../components/Grid";
 import PageTitle from "../components/PageTitle";
 import HeadingOne from "../components/HeadingOne";
+import Section from "../components/Section";
+import Form from "../components/Form";
 
 export default function Lost() {
   const currentItem = useCurrentItem();
   const router = useRouter();
 
   const [foundItems, setFoundItems] = useState([]);
-  const [searchItem, setSearchItem] = useState("");
+  const [searchItem, setSearchItem] = useState("item");
 
   // get
   const firebaseQuery = (e) => {
@@ -44,6 +46,7 @@ export default function Lost() {
   const foundItemslist = foundItems.map((item) => {
     return (
       <div
+        className="item-container"
         key={Math.random() * (100 - 1)}
         onClick={() => {
           currentItem.addItem({
@@ -56,34 +59,48 @@ export default function Lost() {
           router.push("/individualResult");
         }}
       >
-        <HeadingOne>{item.name}</HeadingOne> <p> </p>
-        <p>{item.description}</p>
-        <p className="drop-location">
-          The {item.name} was found at {item.droplocation}
-        </p>
         <img src={item.image}></img>
-        {/* <p>Time: {item.timestamp.seconds}</p> */}
+        <div>
+          <HeadingOne>{item.name}</HeadingOne> <p> </p>
+          <p>{item.description}</p>
+          <p className="drop-location">
+            The {item.name} was found at {item.droplocation}
+          </p>
+        </div>
       </div>
     );
   });
 
   return (
     <>
-      <PageTitle>What did you lose?</PageTitle>
+      <Section className="lost">
+        <PageTitle>WHAT DID YOU LOOSE?</PageTitle>
 
-      <form>
-        <label htmlFor="lostItem">Type your lost item here:</label>
-        <input
-          placeholder="Keys, wallet, mittens, hat etc."
-          type="text"
-          name="lostItem"
-          onChange={inputHandler}
-        ></input>
-        <input type="submit" onClick={firebaseQuery}></input>
-      </form>
+        <Form>
+          <label style={{ display: "none" }} htmlFor="lostItem">
+            Type your lost item here:
+          </label>
+          <input
+            placeholder="Keys, wallet, gloves, etc."
+            type="text"
+            name="lostItem"
+            onChange={inputHandler}
+          ></input>
+          <br />
+          <button type="submit" onClick={firebaseQuery}>
+            SEARCH
+          </button>
+        </Form>
+        <PageTitle>☟</PageTitle>
+      </Section>
 
-      {/* <PageTitle>Results:</PageTitle> */}
-      <Grid>{foundItemslist}</Grid>
+      <Grid>
+        {foundItems.length < 1 ? (
+          <p className="no-results">No {searchItem}s found yet. Sorry.</p>
+        ) : (
+          foundItemslist
+        )}
+      </Grid>
     </>
   );
 }

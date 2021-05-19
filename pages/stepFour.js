@@ -30,7 +30,7 @@ export default function stepFour() {
 
   return (
     <Section>
-      <PageTitle>Where is it now?</PageTitle>
+      <PageTitle>WHERE IS IT NOW?</PageTitle>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <label htmlFor="currentlocation" style={{ display: "none" }}>
           Desribe what you did with the item. Eg. “Handed it in at 7/11 by the
@@ -39,8 +39,7 @@ export default function stepFour() {
 
         <input
           id="currentlocation"
-          placeholder="Desribe what you did with the item. Eg. “Handed it in at 7/11 by the
-          court house”"
+          placeholder="Eg: Handed it in at the 7/11"
           {...register("currentlocation", {
             required: true,
           })}
@@ -50,6 +49,8 @@ export default function stepFour() {
             <span>This is required</span>
           )}
         <button type="submit">Next</button>
+        <br />
+        <p>Step 4 / 5</p>
       </Form>
     </Section>
   );

@@ -51,7 +51,7 @@ function MyApp({ Component, pageProps }) {
                   <a className="bf-logo">Butterfingers</a>
                 </Link>
               </li>
-              <button onClick={toggleTheme}>Switch Theme</button>
+              <button onClick={toggleTheme}>Light / Dark</button>
             </NavBarStyle>
             <Component {...pageProps} />
           </ThemeProvider>

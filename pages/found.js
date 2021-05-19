@@ -7,6 +7,7 @@ import updateAction from "../stateMachineActions/updateAction";
 import PageTitle from "../components/PageTitle";
 import Section from "../components/Section";
 import Form from "../components/Form";
+import ErrorMessage from "../components/ErrorMessage";
 
 export default function Found() {
   const [searchItem, setSearchItem] = useState("");
@@ -37,7 +38,7 @@ export default function Found() {
 
   return (
     <Section>
-      <PageTitle>What did you find?</PageTitle>
+      <PageTitle>WHAT DID YOU FIND?</PageTitle>
 
       <Form onSubmit={handleSubmit(onSubmit)}>
         <label htmlFor="name" style={{ display: "none" }}>
@@ -46,7 +47,7 @@ export default function Found() {
         <br />
         <input
           id="name"
-          placeholder="For example: Keys, mittens, ear ring"
+          placeholder="Keys, wallet, ring, etc."
           {...register("name", {
             required: true,
             maxLength: 30,
@@ -55,13 +56,14 @@ export default function Found() {
           onChange={inputHandler}
         />
         {errors.name && errors.name.type === "required" && (
-          <span>This is required</span>
+          <ErrorMessage>This is required</ErrorMessage>
         )}
         {errors.name && errors.name.type === "maxLength" && (
-          <span>That's to many characters</span>
+          <ErrorMessage>That's to many characters</ErrorMessage>
         )}
         <button type="submit">Next</button>
       </Form>
+      <br />
       <p>Step 1 / 5</p>
     </Section>
   );

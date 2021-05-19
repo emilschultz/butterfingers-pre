@@ -74,12 +74,11 @@ export default function stepFive() {
 
   return (
     <Section>
-      <PageTitle>Please upload an image of the item if possible</PageTitle>
-      <Form onSubmit={handleSubmit(onSubmit)}>
+      <PageTitle> UPLOAD IMAGE</PageTitle>
+      <Form onSubmit={handleSubmit(onSubmit)} style={{ display: "flex" }}>
         <Label htmlFor="image">
           Choose file:
           <input
-            style={{ display: "none" }}
             type="file"
             id="image"
             {...register("image", {
@@ -90,6 +89,8 @@ export default function stepFive() {
         </Label>
 
         <button type="submit">Finish</button>
+        <br />
+        <p>Step 5 / 5</p>
         <button onClick={clearData}>Delete everything and start over</button>
       </Form>
     </Section>

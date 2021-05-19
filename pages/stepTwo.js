@@ -27,7 +27,7 @@ export default function stepTwo() {
 
   return (
     <Section>
-      <PageTitle>What are the key charactaristics?</PageTitle>
+      <PageTitle>WHAT ARE THE KEY FEATURES?</PageTitle>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <label htmlFor="description" style={{ display: "none" }}>
           Short description of the found item. Eg. "Black Casio watch, unisex.
@@ -35,7 +35,7 @@ export default function stepTwo() {
         </label>
         <input
           id="description"
-          placeholder="A short description of the found item:"
+          placeholder="A short description of the item"
           {...register("description", {
             required: true,
           })}
@@ -44,6 +44,8 @@ export default function stepTwo() {
           <span>This is required</span>
         )}
         <button type="submit">Next</button>
+        <br />
+        <p>Step 2 / 5</p>
       </Form>
     </Section>
   );
