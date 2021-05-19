@@ -1,12 +1,34 @@
+import { useState, useEffect } from "react";
 import PageTitle from "../components/PageTitle";
 
 export default function About() {
+  const [jokeData, setJokeData] = useState("");
+
+  useEffect(() => {
+    const joke = "https://official-joke-api.appspot.com/random_joke";
+
+    fetch(joke)
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+        setJokeData(data);
+      });
+  }, []);
+
   return (
     <>
       <PageTitle>
         Butterfingers give people the chance to recover their lost items by
         believing in the best in others.
       </PageTitle>
+      <br />
+      <PageTitle>
+        But first, here's a joke?: <br /> {jokeData.setup} {jokeData.punchline}
+      </PageTitle>
+      <br />
+
       <br />
       <PageTitle>
         ☝️ Usecase 1: <br />
