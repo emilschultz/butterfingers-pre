@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { fonts } from "../../themeConfig";
 
 const Grid = styled.section`
   width: 100%;
@@ -6,17 +7,29 @@ const Grid = styled.section`
   grid-template-columns: repeat(auto-fit, minmax(320px, 3fr));
   grid-template-rows: auto;
   margin: 15rem 0rem;
-  /* border-top: 1px solid ${({ theme }) => theme.text};
-  border-bottom: 1px solid ${({ theme }) => theme.text};
-  padding: 4rem 0rem; */
-  div {
+  grid-gap: 5rem;
+
+  .item-container {
+    height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
+    justify-content: space-between;
     cursor: pointer;
-    padding: 1.5rem;
     border: 0.1rem solid ${({ theme }) => theme.text};
-    margin: 0 -0.1rem -0.1rem 0;
+
+    transition: 0.1s ease-in;
+    padding: 2rem;
+
+    :hover {
+      transform: scale(1.01);
+    }
+  }
+
+  div {
+    height: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
   }
 
   p {
@@ -25,6 +38,14 @@ const Grid = styled.section`
 
   .drop-location {
     text-decoration: underline;
+    font-weight: 700;
+  }
+
+  .no-results {
+    text-align: center;
+    text-decoration: underline;
+    font-family: ${() => fonts.display};
+    font-weight: bolder;
   }
 
   img {
