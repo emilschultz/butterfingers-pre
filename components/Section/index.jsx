@@ -7,5 +7,14 @@ const Section = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  &.lost {
+    height: 100%;
+    margin-top: 8rem;
+  }
+
+  @media only screen and (max-height: 410px) {
+    margin-top: 5.5rem;
+  }
 `;
 export default Section;
