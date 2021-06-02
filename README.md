@@ -1,3 +1,5 @@
+## Check it out at: https://www.butterfingers.no
+
 ## So what does this app do now..?
 Well it is pretty simple. There are two use cases and one solution. Check it out.
 
